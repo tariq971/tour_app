@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "649174116725",
+    "project_id": "unique-tour-app",
+    "storage_bucket": "unique-tour-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:649174116725:android:2447d8a57d4e2e7ee14b3c",
+        "android_client_info": {
+          "package_name": "com.example.tour_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCo3holkppUxJ8xoVnlJeHQJZZaiDntc1Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
