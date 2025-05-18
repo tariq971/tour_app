@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tour_app/data/media_repo.dart';
 import 'package:tour_app/data/product_repository.dart';
 import 'package:tour_app/model/Product.dart';
 import 'package:tour_app/ui/product/view_models/add_product_vm.dart';
@@ -49,7 +52,9 @@ class _AddProductPageState extends State<AddProduct> {
                     color: Colors.red,
                   ),
                 ),
-                Icon(Icons.image,size: 100,),
+                Obx(()=> addProductViewModel.image.value==null? Icon(Icons.image,size: 80,):
+                Image.file(File(addProductViewModel.image.value!.path),width: 150,height: 150),
+                ),
                 ElevatedButton(onPressed: (){
                   addProductViewModel.pickImage();
                 }, child: Text("Pick image")),
@@ -104,5 +109,6 @@ class AddProductBinding extends Bindings {
     Get.put(AuthRepository());
     Get.put(ProductsRepository());
     Get.put(AddProductViewModel());
+    Get.put(MediaRepository());
   }
 }

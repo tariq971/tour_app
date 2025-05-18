@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tour_app/data/media_repo.dart';
 import 'package:tour_app/model/Product.dart';
 import 'package:tour_app/ui/product/view_models/products_vm.dart';
 
@@ -15,7 +16,10 @@ class ProductPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("My Products", style: TextStyle(fontWeight: FontWeight.bold)),
+        title: const Text(
+          "My Products",
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         centerTitle: true,
         backgroundColor: Colors.deepPurple,
         elevation: 0,
@@ -24,10 +28,13 @@ class ProductPage extends StatelessWidget {
         onPressed: () async {
           var result = await Get.toNamed("/addProduct");
           if (result == true) {
-            Get.snackbar("Success", "Product saved successfully",
-                snackPosition: SnackPosition.BOTTOM,
-                backgroundColor: Colors.green,
-                colorText: Colors.white);
+            Get.snackbar(
+              "Success",
+              "Product saved successfully",
+              snackPosition: SnackPosition.BOTTOM,
+              backgroundColor: Colors.green,
+              colorText: Colors.white,
+            );
           }
         },
         backgroundColor: Colors.deepPurple,
@@ -74,8 +81,13 @@ class ProductPage extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: Colors.grey[200],
                     borderRadius: BorderRadius.circular(8),
-                    image: const DecorationImage(
-                      image: NetworkImage("https://via.placeholder.com/150?text=Product"),
+                    image: DecorationImage(
+                      image:
+                          product.image != null
+                              ? NetworkImage(product.image!)
+                              : const NetworkImage(
+                                "https://via.placeholder.com/150?text=Product",
+                              ),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -110,7 +122,8 @@ class ProductPage extends StatelessWidget {
                   children: [
                     IconButton(
                       icon: const Icon(Icons.edit, color: Colors.blue),
-                      onPressed: () => Get.toNamed("/addProduct", arguments: product),
+                      onPressed:
+                          () => Get.toNamed("/addProduct", arguments: product),
                     ),
                     IconButton(
                       icon: const Icon(Icons.delete, color: Colors.red),
@@ -156,12 +169,12 @@ class ProductPage extends StatelessWidget {
   }
 }
 
-
 class ProductsBinding extends Bindings {
   @override
   void dependencies() {
     Get.put(AuthRepository());
     Get.put(ProductsRepository());
     Get.put(ProductsViewModel());
+    Get.put(MediaRepository());
   }
 }
