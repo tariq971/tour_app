@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
         GetPage(name: "/login", page: ()=>LoginPage(),binding: LoginBinding()),
         GetPage(name: "/signup", page: ()=>SignUpPage(),binding: SignUpBinding()),
         GetPage(name: "/forget_password", page: ()=>ResetPasswordPage(),binding: ResetPasswordBinding()),
-        GetPage(name: "/customer_home", page: ()=>CustomerHomePage(),),
+        GetPage(name: "/customer_home", page: ()=>CustomerHomePage(),binding: CustomerHomeBinding()),
         GetPage(name: "/shop_home", page: ()=>ShopHomePage(),),
         GetPage(name: "/products", page: ()=>ProductPage(),binding: ProductsBinding()),
         GetPage(name: "/addProduct", page: ()=>AddProduct(), binding: AddProductBinding()),
