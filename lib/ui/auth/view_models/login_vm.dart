@@ -13,7 +13,12 @@ class LoginViewModel extends GetxController {
     try {
       await authRepository.login(email, password);
       //   success
-      Get.offAllNamed("/products");
+      // Get.offAllNamed("/product");
+      if(getLoggedInUser()?.email== "muhammadtariqkhan971@gmail.com") {
+        Get.offAllNamed("/shop_home");
+      } else {
+        Get.offAllNamed("/customer_home");
+      }
     } on FirebaseAuthException catch (e) {
       //   error
       Get.snackbar("Error", e.message ?? "Login failed");
@@ -24,5 +29,8 @@ class LoginViewModel extends GetxController {
   }
   bool isUserLoggedIn(){
     return authRepository.getLoggedInUser()!= null;
+  }
+  User? getLoggedInUser(){
+    return authRepository.getLoggedInUser();
   }
 }

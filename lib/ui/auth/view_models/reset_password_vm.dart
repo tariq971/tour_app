@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tour_app/data/AuthRepository.dart';
 import 'package:get/get.dart';
-import 'package:tour_app/ui/home/home.dart';
+import 'package:tour_app/ui/customer_home/customer_home.dart';
 
 import '../forget_password.dart';
 

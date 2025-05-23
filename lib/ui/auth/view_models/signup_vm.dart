@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tour_app/data/AuthRepository.dart';
 import 'package:get/get.dart';
-import 'package:tour_app/ui/home/home.dart';
+import 'package:tour_app/ui/customer_home/customer_home.dart';
 
 class SignUpViewModel extends GetxController {
   AuthRepository authRepository = Get.find();
@@ -22,7 +22,7 @@ class SignUpViewModel extends GetxController {
     try {
       await authRepository.signup(email, password);
       //   success
-      Get.offAllNamed("/home");
+      Get.offAllNamed("/customer_home");
     } on FirebaseAuthException catch (e) {
       //   error
       Get.snackbar("Error", e.message ?? "Login failed");

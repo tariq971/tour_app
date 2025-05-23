@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tour_app/ui/auth/view_models/login_vm.dart';
 import 'package:tour_app/ui/auth/view_models/signup_vm.dart';
-import 'package:tour_app/ui/home/home.dart';
+import 'package:tour_app/ui/customer_home/customer_home.dart';
 
 import '../../data/AuthRepository.dart';
 
@@ -13,7 +13,6 @@ class SignUpPage extends StatefulWidget {
   @override
   State<SignUpPage> createState() => _SignUpPageState();
 }
-
 class _SignUpPageState extends State<SignUpPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -29,7 +28,7 @@ class _SignUpPageState extends State<SignUpPage> {
     signUpViewModel = Get.find();
     WidgetsBinding.instance.addPostFrameCallback((_){
       if (signUpViewModel.isUserLoggedIn()) {
-        Get.offAllNamed("/home");
+        Get.offAllNamed("/customer_home");
       }
     });
   }

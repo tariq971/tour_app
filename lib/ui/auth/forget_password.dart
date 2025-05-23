@@ -5,7 +5,7 @@ import 'package:tour_app/ui/auth/signup.dart';
 import 'package:tour_app/ui/auth/view_models/login_vm.dart';
 import 'package:tour_app/ui/auth/view_models/reset_password_vm.dart';
 // import 'package:tour_app/ui/auth/view_models/signup_dependency.dart';
-import 'package:tour_app/ui/home/home.dart';
+import 'package:tour_app/ui/customer_home/customer_home.dart';
 
 import '../../data/AuthRepository.dart';
 
