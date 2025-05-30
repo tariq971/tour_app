@@ -10,9 +10,6 @@ import 'package:tour_app/ui/product/add_product.dart';
 import 'package:tour_app/ui/product/products.dart';
 import 'package:tour_app/ui/shop_home/shop_home.dart';
 
-import 'firebase_options.dart';
-// import 'package:tour_app/ui/auth/view_models/login_dependency.dart';
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);

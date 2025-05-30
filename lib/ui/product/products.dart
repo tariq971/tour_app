@@ -7,7 +7,6 @@ import '../../data/cart_repository.dart';
 import '../../data/product_repository.dart';
 import '../../model/Product.dart';
 
-
 class ProductPage extends StatefulWidget {
   const ProductPage({super.key});
 

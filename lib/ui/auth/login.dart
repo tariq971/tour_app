@@ -23,11 +23,11 @@ class _LoginPageState extends State<LoginPage> {
     loginViewModel = Get.find();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (loginViewModel.isUserLoggedIn()) {
-        // if(loginViewModel.getLoggedInUser()?.email== "muhammadtariqkhan971@gmail.com") {
-        //   Get.offAllNamed("/shop_home");
-        // } else {
-        //   Get.offAllNamed("/customer_home");
-        // }
+        if(loginViewModel.getLoggedInUser()?.email== "muhammadtariqkhan971@gmail.com") {
+          Get.offAllNamed("/shop_home");
+        } else {
+          Get.offAllNamed("/customer_home");
+        }
       }
     });
   }

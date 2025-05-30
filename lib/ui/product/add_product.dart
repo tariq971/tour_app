@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tour_app/data/media_repo.dart';
@@ -14,11 +13,11 @@ class AddProduct extends StatefulWidget {
   @override
   State<AddProduct> createState() => _AddProductPageState();
 }
-
 class _AddProductPageState extends State<AddProduct> {
   TextEditingController nameController = TextEditingController();
   TextEditingController priceController = TextEditingController();
   late AddProductViewModel addProductViewModel;
+
   Product? product;
 
   @override
@@ -108,7 +107,8 @@ class AddProductBinding extends Bindings {
   void dependencies() {
     Get.put(AuthRepository());
     Get.put(ProductsRepository());
-    Get.put(AddProductViewModel());
     Get.put(MediaRepository());
+    Get.put(AddProductViewModel());
+
   }
 }

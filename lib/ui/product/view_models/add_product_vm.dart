@@ -29,7 +29,7 @@ class AddProductViewModel extends GetxController {
         name,
         int.parse(price),
       );
-     await uploadImage(product);
+     if(await uploadImage(product)==false) return;
 
       try {
         await productsRepository.addProduct(product);
@@ -41,7 +41,7 @@ class AddProductViewModel extends GetxController {
       product.name = name;
       product.price = int.parse(price);
       try {
-        await uploadImage(product);
+        if (await uploadImage(product)==false)return;
         await productsRepository.updateProduct(product);
         Get.back(result: true);
       } catch (e) {
@@ -50,18 +50,21 @@ class AddProductViewModel extends GetxController {
     }
     isSaving.value = false;
   }
-  Future<void> uploadImage(Product product) async {
+  Future<bool> uploadImage(Product product) async {
     if (image.value != null) {
       var imageResult = await mediaRepository.uploadImage(image.value!.path);
       if (imageResult.isSuccessful) {
         product.image = imageResult.url;
+        return true;
       } else {
         Get.snackbar(
           "Error uploading image",
           imageResult.error ?? "Could not upload image due to error",
         );
+        return false;
       }
     }
+    return true;
   }
 
   Future<void> pickImage() async {

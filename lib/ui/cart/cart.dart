@@ -28,15 +28,10 @@ class _CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: Obx(
-
         () {
           return Column(
-
             children: [
-
-
           Expanded(
             child: ListView.builder(
             itemCount: cartViewModel.cartItems.length,
