@@ -6,7 +6,7 @@ import 'package:tour_app/ui/customer_home/customer_home.dart';
 class SignUpViewModel extends GetxController {
   AuthRepository authRepository = Get.find();
   var isLoading = false.obs;
-  Future<void> signup(String email, String password ,String confirmPassword) async {
+  Future<void> signup(String email, String password ,String confirmPassword, String name) async {
     if (!email.contains("@")){
       Get.snackbar("Error", "Enter proper email");
       return;
@@ -21,6 +21,7 @@ class SignUpViewModel extends GetxController {
     }
     try {
       await authRepository.signup(email, password);
+      await authRepository.changeName(name);
       //   success
       Get.offAllNamed("/customer_home");
     } on FirebaseAuthException catch (e) {

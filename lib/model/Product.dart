@@ -10,7 +10,7 @@ class Product{
   Product(this.id, this.uId,this.name,this.price);
 
    static Product fromMap(Map<String,dynamic>map){
-    Product p=Product(map["id"],map["uId"],map["name"],map['price']);
+    Product p=Product(map["id"],map["uId"],map["name"],map['price'],);
     p.image=map["image"];
     return p;
   }

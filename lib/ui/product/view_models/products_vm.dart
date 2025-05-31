@@ -19,12 +19,13 @@ class ProductsViewModel extends GetxController {
   }
 
   void loadAllProducts() {
+    print("load products called");
     productsRepository.loadAllProducts().listen((data) {
       products.value = data;
     });
   }
-  void deleteProduct(Product product){
-    productsRepository.deleteProduct(product);
+  Future<void> deleteProduct(Product product) async {
+     await productsRepository.deleteProduct(product);
   }
 
   void addToCart(Product product) {

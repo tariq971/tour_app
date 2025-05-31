@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tour_app/data/order_repository.dart';
 import 'package:tour_app/model/CartItemWithProduct.dart';
+import 'package:tour_app/model/Order.dart';
+import 'package:tour_app/model/OrderItem.dart';
 
 import '../../../data/AuthRepository.dart';
 import '../../data/cart_repository.dart';
@@ -11,6 +14,7 @@ class CartViewModel extends GetxController {
   AuthRepository authRepository = Get.find();
   ProductsRepository productsRepository = Get.find();
   CartItemRepository cartItemRepository = Get.find();
+  OrderRepository orderRepository = Get.find();
   var isLoading = false.obs;
   var cartItems = <CartItemWithProduct>[].obs;
 
@@ -19,10 +23,11 @@ class CartViewModel extends GetxController {
     super.onInit();
     loadAllCartItems();
   }
-  int getGrandTotal(){
-    int total=0;
-    for( var item in cartItems.value) {
-      total+=item.getTotal();
+
+  int getGrandTotal() {
+    int total = 0;
+    for (var item in cartItems.value) {
+      total += item.getTotal();
     }
     return total;
   }
@@ -39,6 +44,41 @@ class CartViewModel extends GetxController {
                   .map((e) => CartItemWithProduct(e, productsMap[e.productId]!))
                   .toList();
         });
+  }
+
+  Future<void> checkOut() async {
+    if (cartItems.value.length == 0) {
+      Get.snackbar("Empty cart", "Cannot checkout empty cart ");
+      return;
+    }
+    Order order = Order(
+      "",
+      authRepository.getLoggedInUser()!.uid,
+      cartItems.value[0].product.uId,
+      authRepository.getLoggedInUser()!.displayName ?? " ",
+    );
+    order.orderItems =
+        cartItems.value
+            .map(
+              (e) => OrderItem(
+                e.product.name,
+                e.product.price,
+                e.product.image,
+                e.cartItem.quantity,
+              ),
+            )
+            .toList();
+
+    try {
+      isLoading.value = true;
+      await orderRepository.addOrder(order);
+    } catch (e) {
+      Get.snackbar("Error", "Error creation order ${e.toString()}");
+      isLoading.value=false;
+      return;
+    }
+    await cartItemRepository.clearCart(authRepository.getLoggedInUser()!.uid);
+    isLoading.value = false;
   }
 
   Future<void> deleteCartItem(CartItem cartItem) async {

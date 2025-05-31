@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tour_app/ui/auth/view_models/login_vm.dart';
+import 'package:tour_app/utils/Functions.dart';
 import '../../data/AuthRepository.dart';
 
 class LoginPage extends StatefulWidget {
@@ -23,7 +24,7 @@ class _LoginPageState extends State<LoginPage> {
     loginViewModel = Get.find();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (loginViewModel.isUserLoggedIn()) {
-        if(loginViewModel.getLoggedInUser()?.email== "muhammadtariqkhan971@gmail.com") {
+        if(Functions.isShop(loginViewModel.getLoggedInUser())) {
           Get.offAllNamed("/shop_home");
         } else {
           Get.offAllNamed("/customer_home");

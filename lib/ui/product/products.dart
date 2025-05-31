@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tour_app/ui/product/view_models/products_vm.dart';
-
 import '../../data/AuthRepository.dart';
 import '../../data/cart_repository.dart';
 import '../../data/product_repository.dart';

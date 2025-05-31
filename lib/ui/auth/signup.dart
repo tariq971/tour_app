@@ -1,10 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tour_app/ui/auth/view_models/login_vm.dart';
 import 'package:tour_app/ui/auth/view_models/signup_vm.dart';
-import 'package:tour_app/ui/customer_home/customer_home.dart';
-
 import '../../data/AuthRepository.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -17,6 +13,7 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
+  TextEditingController nameController= TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   late SignUpViewModel signUpViewModel;
@@ -61,6 +58,16 @@ class _SignUpPageState extends State<SignUpPage> {
                     hintText: " Enter Email",
                     labelText: "Email",
                     prefixIcon: Icon(Icons.email_outlined),
+                    prefixIconColor: Colors.green,
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+                TextFormField(
+                  controller: nameController,
+                  decoration: InputDecoration(
+                    hintText: " Enter Name",
+                    labelText: "Name",
+                    prefixIcon: Icon(Icons.abc_outlined),
                     prefixIconColor: Colors.green,
                     border: OutlineInputBorder(),
                   ),
@@ -135,6 +142,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     onPressed: () {
                       signUpViewModel.signup(
                         emailController.text,
+                        nameController.text,
                         passwordController.text,
                         confirmPasswordController.text,
                       );

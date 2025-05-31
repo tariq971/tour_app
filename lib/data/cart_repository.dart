@@ -17,6 +17,15 @@ class CartItemRepository {
     return CartItemCollection.doc(cartItem.getId()).delete();
   }
 
+  Future<void> clearCart(String userId) async {
+    var items= await loadAllProductsOnce(userId);
+    var batch = FirebaseFirestore.instance.batch();
+    for(var item in items){
+      batch.delete(CartItemCollection.doc(item.getId()));
+    }
+    await batch.commit();
+  }
+
   Future<void> addCartItem(CartItem cartItem) {
     return CartItemCollection.doc(cartItem.getId()).set(cartItem.toMap());
   }
@@ -27,6 +36,11 @@ class CartItemRepository {
         return convertToCartItem(snapshot);
       },
     );
+  }
+
+  Future<List<CartItem>>loadAllProductsOnce(String userId) async {
+    var snapshot= await CartItemCollection.where("userId",isEqualTo: userId).get();
+    return convertToCartItem(snapshot);
   }
 
   // todo: check live listen
